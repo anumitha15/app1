@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Connection Example</title>
+</head>
+<body>
+    <h1>Azure Connection Example</h1>
+    <button id="callFunction">Call Azure Function</button>
+    <p id="responseText"></p>
+
+    <script>
+        document.getElementById('callFunction').addEventListener('click', async () => {
+            const functionUrl = 'https://your-function-app.azurewebsites.net/api/yourFunctionName'; // Replace with your Azure Function URL
+            try {
+                const response = await fetch(functionUrl, {
+                    method: 'GET'
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('responseText').textContent = JSON.stringify(data);
+                } else {
+                    document.getElementById('responseText').textContent = 'Error calling function.';
+                }
+            } catch (error) {
+                document.getElementById('responseText').textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
